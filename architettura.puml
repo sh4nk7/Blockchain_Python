@@ -1,0 +1,34 @@
+@startuml
+
+cloud Blockchain {
+    cloud "Nodo 1" as n1
+    cloud "Nodo 2" as n2
+    cloud "Nodo 3" as n3
+    cloud "Nodo n" as nn
+}
+
+n1 -- n2
+n1 -- nn
+nn -left- n2
+nn -- n3
+n3 -- n2
+n3 -- n1
+
+frame "Sistema Informativo Aziendale" as fr {
+    database Database as db
+    artifact "Software 1" as sw1
+    artifact "Software 2" as sw2
+    artifact "Software n" as swn
+    db -- sw1
+    db -- sw2
+    db -- swn
+}
+
+fr =down= nn : HTTPS
+
+artifact "Dispositivo IoT" as iot1
+artifact "App mobile" as app
+
+app =up= n1 : HTTPS
+iot1 =up= n1 : HTTPS
+@enduml
